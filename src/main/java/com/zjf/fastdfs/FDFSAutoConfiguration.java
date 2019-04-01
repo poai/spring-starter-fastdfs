@@ -12,13 +12,16 @@ import org.csource.fastdfs.StorageClient;
 import org.csource.fastdfs.StorageServer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ResourceUtils;
 
+/**
+ * 满足以下条件加载FastDFS模块：<br>
+ * 1.类路径中存在StorageClient.class及StorageServer.class<br/>
+ * 2.fdfs.enabled=true
+ **/
 @Configuration
-@ConfigurationProperties(prefix = "fdfs")
 @ConditionalOnClass(value = { StorageClient.class, StorageServer.class })
 @ConditionalOnProperty(name = "fdfs.enabled", havingValue = "true")
 public class FDFSAutoConfiguration {
